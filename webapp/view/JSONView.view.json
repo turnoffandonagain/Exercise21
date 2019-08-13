@@ -1,0 +1,22 @@
+{
+	"Type": "sap.ui.core.mvc.JSONView",
+	"controllerName": "sap.sapx05.controller.JSONView",
+	"content": [{
+		"Type": "sap.m.Page",
+		"title": "Exercise 5 - JSON View",
+		"content": [
+			{"Type":"sap.m.Label",
+			"id": "lblFirstName",
+			"text": "JSON First Name:"},
+			{"Type":"sap.m.Input",
+			"id": "inpFirstName",
+			"text":""},
+			{"Type":"sap.m.Label",
+			"id": "lblLastName",
+			"text": "JSON Last Name:"},
+			{"Type":"sap.m.Input",
+			"id": "inpLastName",
+			"text":""}
+		]
+	}]
+}

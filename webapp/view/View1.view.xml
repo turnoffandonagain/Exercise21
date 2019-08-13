@@ -1,0 +1,159 @@
+<mvc:View controllerName="sap.sapx05.controller.View1" xmlns:core="sap.ui.core" xmlns:html="http://www.w3.org/1999/xhtml"
+	xmlns:l="sap.ui.layout" xmlns:m="sap.m" xmlns:mvc="sap.ui.core.mvc" xmlns:t="sap.ui.table" xmlns="sap.m">
+	<App height="99.5%">
+		<pages>
+			<Page title="Exercise 21">
+				<headerContent>
+					<Title text="{ path:'/date', type:'sap.ui.model.type.Date', formatOptions: { pattern: 'MM.dd.yyyy' } }"/>
+				</headerContent>
+				<content>
+					<Panel headerText="{i18n>EnterName}">
+						<content>
+							<l:Grid>
+								<FlexBox alignItems="Center" justifyContent="SpaceAround">
+									<items>
+										<Label id="lblFirstName" text="{i18n>FirstName}"/>
+										<ComboBox id="inpFirstName" items="{path:'selections>/data'}" selectedKey="{/firstName}" value="{/firstName}">
+											<core:Item key="{selections>key}" text="{selections>text}"/>
+										</ComboBox>
+									</items>
+									<layoutData>
+										<l:GridData span="L3 M5 S12"></l:GridData>
+									</layoutData>
+								</FlexBox>
+								<FlexBox alignItems="Center" justifyContent="SpaceAround">
+									<items>
+										<Label id="lblLastName" text="{i18n>LastName}"/>
+										<Input change="onChange" id="inpLastName" value="{/lastName}"/>
+									</items>
+									<layoutData>
+										<l:GridData span="L3 M5 S12"></l:GridData>
+									</layoutData>
+								</FlexBox>
+								<FlexBox alignItems="Center" justifyContent="SpaceAround">
+									<items>
+										<Text text="Model First:"/>
+										<Text text="{/firstName}"/>
+										<Text text="Model Last:"/>
+										<Text text="{/lastName}"/>
+									</items>
+									<layoutData>
+										<l:GridData linebreakL="true" span="L6 M10 S12"></l:GridData>
+									</layoutData>
+								</FlexBox>
+								<FlexBox alighItems="Center" justifyContent="SpaceAround">
+									<items>
+										<Button id="btnSubmit" press="onBtnClick" text="{i18n>Submit}"/>
+										<core:ComponentContainer name="sap.sapx05.components.button" settings="{text:'Component Submit'}"></core:ComponentContainer>
+									</items>
+									<layoutData>
+										<l:GridData linebreakL="true" span="L6 M10 S12"></l:GridData>
+									</layoutData>
+								</FlexBox>
+							</l:Grid>
+						</content>
+					</Panel>
+					<Panel expandable="true" headerText="Added Views">
+						<content>
+							<l:Grid>
+								<FlexBox alignItems="Center" justifyContent="SpaceAround">
+									<items>
+										<mvc:HTMLView height="240px" id="vHTML" viewName="sap.sapx05.view.HTMLView"></mvc:HTMLView>
+									</items>
+									<layoutData>
+										<l:GridData span="L4 M4 S12"></l:GridData>
+									</layoutData>
+								</FlexBox>
+								<FlexBox alignItems="Center" justifyContent="SpaceAround">
+									<items>
+										<mvc:JSView height="240px" id="vJS" viewName="sap.sapx05.view.JSView"></mvc:JSView>
+									</items>
+									<layoutData>
+										<l:GridData span="L4 M4 S12"></l:GridData>
+									</layoutData>
+								</FlexBox>
+								<FlexBox alignItems="Center" justifyContent="SpaceAround">
+									<items>
+										<mvc:JSONView height="240px" id="vJSON" viewName="sap.sapx05.view.JSONView"></mvc:JSONView>
+									</items>
+									<layoutData>
+										<l:GridData span="L4 M4 S12"></l:GridData>
+									</layoutData>
+								</FlexBox>
+							</l:Grid>
+						</content>
+					</Panel>
+					<Panel expandable="true" headerText="oData">
+						<t:Table id="oDataTable"
+							rows="{path:'/Employees', sorter:[{path:'LastName', descending:false}], filters:[{path:'FirstName', operator:'BT', value1:'A', value2:'K'}]}"
+							xmlns="sap.ui.table">
+							<t:columns>
+								<t:Column sortProperty="EmployeeID">
+									<m:Label text="ID"/>
+									<t:template>
+										<m:Text text="{EmployeeID}"/>
+									</t:template>
+								</t:Column>
+								<t:Column sortProperty="FirstName">
+									<m:Label text="First Name"/>
+									<t:template>
+										<m:Text text="{FirstName}"/>
+									</t:template>
+								</t:Column>
+								<t:Column sortProperty="LastName">
+									<m:Label text="Last Name"/>
+									<t:template>
+										<m:Text text="{LastName}"/>
+									</t:template>
+								</t:Column>
+								<t:Column sortProperty="Title">
+									<m:Label text="Title"/>
+									<t:template>
+										<m:Text text="{Title}"/>
+									</t:template>
+								</t:Column>
+								<t:Column sortProperty="Notes">
+									<m:Label text="Notes"/>
+									<t:template>
+										<m:Text text="{path: 'Notes',formatter: '.formatter.formatTitleCase'}"/>
+									</t:template>
+								</t:Column>
+							</t:columns>
+							<!-- sap.ui.table.Column -->
+							<t:rows></t:rows>
+							<!-- sap.ui.table.Row -->
+						</t:Table>
+					</Panel>
+					<Panel expandable="true" headerText="Calculated Fields">
+						<t:Table id="calcTable" rows="{path:'/teamMembers'}" xmlns="sap.ui.table">
+							<t:columns>
+								<t:Column width="150px">
+									<m:Label text="First Name"/>
+									<t:template>
+										<m:Text text="{firstName}"/>
+									</t:template>
+								</t:Column>
+								<t:Column width="150px">
+									<m:Label text="Last Name"/>
+									<t:template>
+										<m:Text text="{lastName}"/>
+									</t:template>
+								</t:Column>
+								<t:Column>
+									<m:Label text="Description"/>
+									<t:template>
+										<m:Text
+											text="{parts:[{path:'gender'}, {path:'firstName'}, {path:'lastName'}, {path:'occupation'}], formatter: '.formatter.generateDescription'}"/>
+									</t:template>
+								</t:Column>
+							</t:columns>
+							<!-- sap.ui.table.Column -->
+							<t:rows></t:rows>
+							<!-- sap.ui.table.Row -->
+						</t:Table>
+					</Panel>
+				</content>
+			</Page>
+		</pages>
+	</App>
+</mvc:View>
